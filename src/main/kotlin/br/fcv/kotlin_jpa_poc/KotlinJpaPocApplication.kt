@@ -1,5 +1,6 @@
 package br.fcv.kotlin_jpa_poc
 
+import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -26,9 +27,12 @@ class KotlinJpaPocApplication {
         listOf<Person>(Person(name = "Ozzy Osbourne", birthday = LocalDate.of(1948, 12, 3)),
                     Person(name = "John Lennon", birthday = LocalDate.of(1940, 10, 9)))
                 .map { personRepository.save(it) }
-                .forEach { println(it) }
+                .forEach { logger.info("Just saved {}", it) }
     }
 
+    companion object {
+        val logger = LoggerFactory.getLogger(KotlinJpaPocApplication::class.java)
+    }
 }
 
 fun main(args: Array<String>) {
