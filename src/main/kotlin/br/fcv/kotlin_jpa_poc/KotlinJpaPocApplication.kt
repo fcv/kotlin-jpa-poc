@@ -24,7 +24,7 @@ class KotlinJpaPocApplication {
     @Bean
     fun populate(personRepository: PersonRepository) = CommandLineRunner {
 
-        listOf<Person>(Person(name = "Ozzy Osbourne", birthday = LocalDate.of(1948, 12, 3)),
+        listOf(Person(name = "Ozzy Osbourne", birthday = LocalDate.of(1948, 12, 3)),
                     Person(name = "John Lennon", birthday = LocalDate.of(1940, 10, 9)))
                 .map { personRepository.save(it) }
                 .forEach { logger.info("Just saved {}", it) }
