@@ -5,11 +5,9 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Import
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 import org.springframework.data.repository.CrudRepository
 import org.springframework.data.rest.core.annotation.RepositoryRestResource
-import springfox.documentation.spring.data.rest.configuration.SpringDataRestConfiguration
 import springfox.documentation.swagger2.annotations.EnableSwagger2
 import java.time.LocalDate
 import javax.persistence.Entity
@@ -18,7 +16,10 @@ import javax.persistence.Id
 
 @EnableSwagger2
 @SpringBootApplication
-@Import(SpringDataRestConfiguration::class)
+// @Import(SpringDataRestConfiguration::class)
+// throws a NoSuchMethodError on Spring Boot 2
+//   > Caused by: java.lang.NoSuchMethodError: org.springframework.data.repository.support.Repositories.getRepositoryInformationFor(Ljava/lang/Class;)Lorg/springframework/data/repository/core/RepositoryInformation;
+//   >     at springfox.documentation.spring.data.rest.EntityServicesProvider.requestHandlers(EntityServicesProvider.java:81) ~[springfox-data-rest-2.8.0.jar:2.8.0]
 class KotlinJpaPocApplication {
 
     @Bean
@@ -43,4 +44,4 @@ fun main(args: Array<String>) {
 interface PersonRepository : JpaSpecificationExecutor<Person>, CrudRepository<Person, Long>
 
 @Entity
-data class Person(@Id @GeneratedValue val id: Long? = null, var name: String, var birthday: LocalDate)
+data class Person(@Id @GeneratedValue val id: Long? = null, var name: String, var birthday: LocalDate, var noise: String = "")

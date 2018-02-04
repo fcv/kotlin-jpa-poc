@@ -9,7 +9,7 @@ spring:
   jpa:
     generate-ddl: true
   datasource:
-      initialize: false
+      initialization-mode: never
       url: jdbc:postgresql://${DB_HOST:localhost}:5432/${DB_NAME:db}
       username: ${DB_USER:db_user}
       password: ${DB_PASSWORD:db_password}
